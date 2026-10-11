@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>习惯打卡</title>
+<meta name="theme-color" content="#f4f6fb">
+<meta name="description" content="每天打卡，坚持你想做的事。数据全部保存在你自己的手机里。">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="打卡">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">习惯打卡</span>
+    <button type="button" class="chip" id="profileChip" aria-haspopup="dialog">
+      <span class="avatar" id="avatar">我</span>
+      <span class="chip-name" id="profileName">我</span>
+      <span class="chip-chev">▾</span>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card hero">
+    <div class="hero-top">
+      <h1 id="dateLabel"></h1>
+      <span class="hint" id="hint"></span>
+    </div>
+    <div class="progress-line">
+      <span class="progress-num">今日完成 <strong id="doneCount">0</strong> / <span id="totalCount">0</span> 项</span>
+      <span class="sub" id="profileSub"></span>
+    </div>
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>今日清单</h2>
+      <div class="head-actions">
+        <span class="sub" id="listSub"></span>
+        <button type="button" class="link" id="editToggle">编辑</button>
+      </div>
+    </div>
+    <ul class="habits" id="habitList"></ul>
+    <div class="empty" id="emptyState">
+      <span class="big">🌱</span>
+      还没有习惯<br>先添加一个你想坚持的习惯吧，比如「背单词」「运动」「学习」
+    </div>
+    <form class="add" id="addForm" autocomplete="off">
+      <input id="newHabit" type="text" maxlength="20" placeholder="添加一个新习惯…" aria-label="新习惯名称">
+      <button class="btn-primary" type="submit">添加</button>
+    </form>
+    <p class="notice" id="notice" hidden></p>
+  </section>
+
+  <section class="card" id="historyCard" hidden>
+    <div class="card-head">
+      <h2>最近 14 天</h2>
+      <span class="sub">点一天看详情</span>
+    </div>
+    <ul class="history" id="historyList"></ul>
+  </section>
+
+  <p class="footnote">
+    数据只保存在这台设备的浏览器里，不会上传<br>
+    iPhone：Safari 分享 →「添加到主屏幕」　Android：菜单 →「安装应用 / 添加到主屏幕」
+  </p>
+</main>
+
+<div class="sheet-mask" id="sheetMask" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="使用者">
+    <div class="sheet-head">
+      <h2>使用者</h2>
+      <button type="button" class="icon" id="sheetClose" aria-label="关闭">✕</button>
+    </div>
+    <p class="sheet-tip">每个人一套独立的习惯和记录，互不影响</p>
+    <ul class="profiles" id="profileList"></ul>
+    <form class="add" id="addProfileForm" autocomplete="off">
+      <input id="newProfile" type="text" maxlength="10" placeholder="新建使用者，如：妈妈" aria-label="新使用者名称">
+      <button class="btn-primary" type="submit">新建</button>
+    </form>
+    <p class="notice" id="sheetNotice" hidden></p>
+    <div class="sheet-foot">
+      <button type="button" class="link" id="exportBtn">导出备份</button>
+      <button type="button" class="link" id="importBtn">导入备份</button>
+      <input type="file" id="importFile" accept=".json,application/json" hidden>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
